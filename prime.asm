@@ -6,10 +6,12 @@ section .data
 
 number db 5
 answer db 1 ; 1 means number is prime 0 means number is not prime
+
 prime_msg db "Number is prime", 0x0a ;
+lenPrime equ $ - prime_msg ; calculate message lenght
+
 not_prime_msg db "Number is NOT prime", 0x0a ;
 lenNoPrime equ $ - not_prime_msg ; calculate message lenght
-lenPrime equ $ - prime_msg ; calculate message lenght
 
 section .bss
 
@@ -35,8 +37,8 @@ _loopstart:
     cmp ah, 0;
     je _notPrimeMsg ; Display NOT prime message if quotient is zero
     
-    inc bl ; Increase the divisor
     cmp dl, bl ; Perform dl - bl
+    inc bl ; Increase the divisor
     jg _loopstart 
 
 _notPrimeMsg:
