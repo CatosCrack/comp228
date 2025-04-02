@@ -29,6 +29,7 @@ _loopstart:
     mov eax, 0 ; Clear EAX
     mov al, [number]; Move number into lower half
 
+
     div bl ; divide number by 2
     
     cmp ah, 0;
@@ -38,18 +39,6 @@ _loopstart:
     cmp dl, bl ; Perform dl - bl
     jg _loopstart 
 
-_primeMsg:
-    mov edx, 0 ; Clear EDX
-    mov ecx, 0 ; Clear ECX
-    mov ebx, 0 ; Clear EBX
-    mov eax, 0 ; Clear EAX
-    mov edx, lenPrime ; Assign message length to EDX 
-    mov ecx, prime_msg ; Load message address to ECX
-    mov ebx, 1 ; Define stdout
-    mov eax, 4 ; Define sys_write
-    int 0x80 ; Call kernel
-    jmp _exit ; Quit program
-
 _notPrimeMsg:
     mov edx, 0 ; Clear EDX
     mov ecx, 0 ; Clear ECX
@@ -57,6 +46,18 @@ _notPrimeMsg:
     mov eax, 0 ; Clear EAX
     mov edx, lenNoPrime ; Assign message length to EDX
     mov ecx, not_prime_msg ; Load message address to ECX
+    mov ebx, 1 ; Define stdout
+    mov eax, 4 ; Define sys_write
+    int 0x80 ; Call kernel
+    jmp _exit ; Quit program
+
+_primeMsg:
+    mov edx, 0 ; Clear EDX
+    mov ecx, 0 ; Clear ECX
+    mov ebx, 0 ; Clear EBX
+    mov eax, 0 ; Clear EAX
+    mov edx, lenPrime ; Assign message length to EDX 
+    mov ecx, prime_msg ; Load message address to ECX
     mov ebx, 1 ; Define stdout
     mov eax, 4 ; Define sys_write
     int 0x80 ; Call kernel
