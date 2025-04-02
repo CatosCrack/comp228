@@ -23,16 +23,16 @@ _start:
     mov dl, [number]; Move number into DL for the sake of comparison
 
 _loopstart:
-    mov eax, 0 ; Clear EAX
-    mov al, [number]; Move number into lower half
-
     cmp dl, bl ; compare if both numbers are equal
     je _primeMsg ; Jump to prime message if equal
 
-    div bl ; divide number by 2
-    and ax, 1111111100000000b ; Masks ax to only see the remainder
+    mov eax, 0 ; Clear EAX
+    mov al, [number]; Move number into lower half
 
-    jz _notPrimeMsg ; Display NOT prime message if quotient is zero
+    div bl ; divide number by 2
+    
+    cmp ah, 0;
+    je _notPrimeMsg ; Display NOT prime message if quotient is zero
     
     inc bl ; Increase the divisor
     cmp dl, bl ; Perform dl - bl
