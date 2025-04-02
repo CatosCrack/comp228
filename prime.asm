@@ -42,6 +42,7 @@ _loopstart:
     jg _loopstart 
 
 _notPrimeMsg:
+    mov answer, 0 ; Assign answer as zero to indicate number is not prime 
     mov edx, 0 ; Clear EDX
     mov ecx, 0 ; Clear ECX
     mov ebx, 0 ; Clear EBX
