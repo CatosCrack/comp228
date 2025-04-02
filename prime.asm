@@ -6,7 +6,7 @@ section .data
 
 number db 5
 answer db 1 ; 1 means number is prime 0 means number is not prime
-prime_msg db "Number is prime", 0x0a ; ASCII 0x0a = LINE FEED (for new line)
+prime_msg db "Number is prime", 0x0a ;
 not_prime_msg db "Number is NOT prime", 0x0a ;
 lenNoPrime equ $ - not_prime_msg ; calculate message lenght
 lenPrime equ $ - prime_msg ; calculate message lenght
@@ -39,6 +39,10 @@ _loopstart:
     jg _loopstart 
 
 _primeMsg:
+    mov edx, 0 ; Clear EDX
+    mov ecx, 0 ; Clear ECX
+    mov ebx, 0 ; Clear EBX
+    mov eax, 0 ; Clear EAX
     mov edx, lenPrime ; Assign message length to EDX 
     mov ecx, prime_msg ; Load message address to ECX
     mov ebx, 1 ; Define stdout
@@ -47,6 +51,10 @@ _primeMsg:
     jmp _exit ; Quit program
 
 _notPrimeMsg:
+    mov edx, 0 ; Clear EDX
+    mov ecx, 0 ; Clear ECX
+    mov ebx, 0 ; Clear EBX
+    mov eax, 0 ; Clear EAX
     mov edx, lenNoPrime ; Assign message length to EDX
     mov ecx, not_prime_msg ; Load message address to ECX
     mov ebx, 1 ; Define stdout
