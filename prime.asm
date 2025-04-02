@@ -5,9 +5,9 @@
 section .data
 
 number db 5
-answer db 1 ; 1 means number is prime, 0 means number is not prime
-prime_msg db ’Number is prime’, 0x0a ; ASCII 0x0a = LINE FEED (for new line)
-not_prime_msg db ’Number is NOT prime’, 0x0a
+answer db 1 ; 1 means number is prime 0 means number is not prime
+prime_msg db "Number is prime", 0x0a ; ASCII 0x0a = LINE FEED (for new line)
+not_prime_msg db "Number is NOT prime", 0x0a ;
 
 section .bss
 
@@ -31,6 +31,7 @@ _loopstart:
     inc bl ; Increase the divisor
     cmp dl, bl ; Perform dl - bl
     jg _loopstart
+    
     jmp _primeMsg ; Jump to prime message 
 
 _primeMsg:
@@ -38,3 +39,8 @@ _primeMsg:
 
 _notPrimeMsg:
 ; This displays the message NOT prime
+
+_exit:
+    mov eax, 1  ; sys_exit
+    xor ebx, ebx  ; Exit status 0
+    int 0x80  ; Call kernel
