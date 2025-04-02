@@ -18,11 +18,11 @@ _start:
     mov ebx, 0 ; Clear EBX
     mov bl, 2 ; Sets two as divisor
     mov edx, 0; Clear entire EDX register
-    mov dl, number; Move number into DL for the sake of comparison
+    mov dl, [number]; Move number into DL for the sake of comparison
 
 _loopstart:
     mov eax, 0 ; Clear EAX
-    mov al, number; Move number into lower half
+    mov al, [number]; Move number into lower half
     div bl ; divide number by 2
     and ax, 1111111100000000b ; Masks ax to only see the remainder
 
