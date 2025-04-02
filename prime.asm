@@ -25,16 +25,16 @@ _start:
 _loopstart:
     mov eax, 0 ; Clear EAX
     mov al, [number]; Move number into lower half
+    cmp dl, bl ; compare if both numbers are equal
+    je _primeMsg ; Jump to prime message
     div bl ; divide number by 2
     and ax, 1111111100000000b ; Masks ax to only see the remainder
 
     jz _notPrimeMsg ; Display NOT prime message
-
+    
     inc bl ; Increase the divisor
     cmp dl, bl ; Perform dl - bl
-    jg _loopstart
-    
-    jmp _primeMsg ; Jump to prime message 
+    jg _loopstart 
 
 _primeMsg:
     mov edx, lenPrime ; Assign message length to EDX 
@@ -46,7 +46,7 @@ _primeMsg:
 
 _notPrimeMsg:
     mov edx, lenNoPrime ; Assign message length to EDX
-    mov ecx, prime_msg ; Load message address to ECX
+    mov ecx, not_prime_msg ; Load message address to ECX
     mov ebx, 1 ; Define stdout
     mov eax, 4 ; Define sys_write
     int 0x80 ; Call kernel
