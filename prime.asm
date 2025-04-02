@@ -8,6 +8,8 @@ number db 5
 answer db 1 ; 1 means number is prime 0 means number is not prime
 prime_msg db "Number is prime", 0x0a ; ASCII 0x0a = LINE FEED (for new line)
 not_prime_msg db "Number is NOT prime", 0x0a ;
+lenNoPrime equ $ - not_prime_msg ; calculate message lenght
+lenPrime equ $ - prime_msg ; calculate message lenght
 
 section .bss
 
@@ -35,10 +37,20 @@ _loopstart:
     jmp _primeMsg ; Jump to prime message 
 
 _primeMsg:
-; This displays the message prime
+    mov edx, lenPrime ; Assign message length to EDX 
+    mov ecx, prime_msg ; Load message address to ECX
+    mov ebx, 1 ; Define stdout
+    mov eax, 4 ; Define sys_write
+    int 0x80 ; Call kernel
+    jmp _exit ; Quit program
 
 _notPrimeMsg:
-; This displays the message NOT prime
+    mov edx, lenNoPrime ; Assign message length to EDX
+    mov ecx, prime_msg ; Load message address to ECX
+    mov ebx, 1 ; Define stdout
+    mov eax, 4 ; Define sys_write
+    int 0x80 ; Call kernel
+    jmp _exit ; Quit program
 
 _exit:
     mov eax, 1  ; sys_exit
